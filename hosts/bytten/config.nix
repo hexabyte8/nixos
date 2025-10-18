@@ -357,7 +357,7 @@ in
     # For Hyprland QT Support
     QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
     WLR_NO_HARDWARE_CURSORS = "1";
-    }
+  };
 
   services.tailscale.enable = true;
   # Open ports in the firewall.
