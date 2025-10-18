@@ -198,6 +198,7 @@
     ugrep
     unrar
     v4l-utils
+    scanmem
     obs-studio
     zoxide
 
