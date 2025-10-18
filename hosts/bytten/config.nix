@@ -351,10 +351,13 @@ in
   
   console.keyMap = "us";
 
-  # For Electron apps to use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  # For Hyprland QT Support
-  environment.sessionVariables.QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
+  environment.sessionVariables = {
+    # For Electron apps to use wayland
+    NIXOS_OZONE_WL = "1";
+    # For Hyprland QT Support
+    QML_IMPORT_PATH = "${pkgs.hyprland-qt-support}/lib/qt-6/qml";
+    WLR_NO_HARDWARE_CURSORS = "1";
+    }
 
   services.tailscale.enable = true;
   # Open ports in the firewall.
