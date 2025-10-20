@@ -100,6 +100,7 @@
     })
     bottom
     baobab
+    bind
     btrfs-progs
     cmatrix
     dua
