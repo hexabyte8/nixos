@@ -47,6 +47,11 @@
 
   };
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.packageOverrides = pkgs: {
+        curseforge = pkgs.writeShellScriptBin "curseforge" ''
+        exec ${pkgs.appimage-run}/bin/appimage-run /home/hexabyte/Games/ "@"
+        '';
+    }
 
   environment.systemPackages = with pkgs; [
 
@@ -66,6 +71,9 @@
     (writeShellScriptBin "ncg" ''
       nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
     '')
+
+    appimage-run
+    curseforge
 
     # Hyprland Stuff
     hypridle
