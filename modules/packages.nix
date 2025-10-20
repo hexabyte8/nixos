@@ -186,6 +186,7 @@
     hyfetch
     ipfetch
     lolcat
+    opencode
     lsd
     oh-my-posh
     pfetch
