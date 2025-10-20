@@ -51,7 +51,7 @@
         curseforge = pkgs.writeShellScriptBin "curseforge" ''
         exec ${pkgs.appimage-run}/bin/appimage-run /home/hexabyte/Games/ "@"
         '';
-    }
+    };
 
   environment.systemPackages = with pkgs; [
 
