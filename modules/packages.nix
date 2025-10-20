@@ -48,9 +48,20 @@
   };
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
-        curseforge = pkgs.writeShellScriptBin "curseforge" ''
-        exec ${pkgs.appimage-run}/bin/appimage-run /home/hexabyte/Games/curseforge-latest-linux.AppImage --ozone-platform=wayland --enable-features=WaylandWindowDecorations "$@"
-        '';
+        curseforge = pkgs.stdenv.mkDerivation {
+          name = "curseforge";
+          src = builtins.path { path = ../curseforge-latest-linux.deb; };
+          unpackPhase = ''
+            dpkg-deb -x $src .
+          '';
+          installPhase = ''
+            mkdir -p $out/bin
+            cp -r usr/* $out/
+            # Create a symlink for easier access
+            ln -s $out/share/curseforge/curseforge $out/bin/curseforge
+          '';
+          nativeBuildInputs = [ pkgs.dpkg ];
+        };
     };
 
   environment.systemPackages = with pkgs; [
@@ -72,7 +83,6 @@
       nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
     '')
 
-    appimage-run
     curseforge
 
     # Hyprland Stuff
