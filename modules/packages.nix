@@ -49,7 +49,7 @@
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides = pkgs: {
         curseforge = pkgs.writeShellScriptBin "curseforge" ''
-        exec ${pkgs.appimage-run}/bin/appimage-run /home/hexabyte/Games/ "@"
+        exec ${pkgs.appimage-run}/bin/appimage-run /home/hexabyte/Games/curseforge-latest-linux.AppImage "$@"
         '';
     };
 
