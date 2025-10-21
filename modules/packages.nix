@@ -83,8 +83,6 @@
       nix-collect-garbage --delete-old && sudo nix-collect-garbage -d && sudo /run/current-system/bin/switch-to-configuration boot
     '')
 
-    curseforge
-
     # Hyprland Stuff
     hypridle
     hyprpolkitagent
@@ -101,7 +99,6 @@
 
     #  Apps
     loupe
-    appimage-run
     bc
     brightnessctl
     (btop.override {
