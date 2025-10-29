@@ -130,7 +130,11 @@ in
     networkmanager.enable = true;
     hostName = "${host}";
     timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
-    interfaces.enp5s0.wakeOnLan.enable = true;
+    interfaces = {
+        enp5s0 = {
+            wakeOnLan.enable = true;
+      };
+    };
   };
 
   # Set your time zone.
