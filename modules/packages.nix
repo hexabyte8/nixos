@@ -89,6 +89,7 @@
     pyprland
     #uwsm
     hyprlang
+    zip
     hyprshot
     hyprcursor
     mesa
