@@ -195,7 +195,6 @@
     (inputs.ags.packages.${pkgs.system}.default)
 
     # Utils
-    ansible
     caligula # burn ISOs at cli FAST
     atop
     gdu
@@ -236,6 +235,7 @@
     # Development related
     luarocks
     nh
+    ansible
 
 
     # Virtuaizaiton
