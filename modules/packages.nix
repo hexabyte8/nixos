@@ -84,6 +84,7 @@
     '')
 
     # Hyprland Stuff
+
     hypridle
     hyprpolkitagent
     pyprland
@@ -194,6 +195,7 @@
     (inputs.ags.packages.${pkgs.system}.default)
 
     # Utils
+    ansible
     caligula # burn ISOs at cli FAST
     atop
     gdu
