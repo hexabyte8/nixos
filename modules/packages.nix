@@ -236,6 +236,7 @@
     luarocks
     nh
     ansible
+    terraform
 
 
     # Virtuaizaiton
