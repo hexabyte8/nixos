@@ -190,6 +190,7 @@
     mdcat # Markdown tool
     parallel-disk-usage # fast disk space tool run: pdu
     pik # Interactive process killer 
+    obsidian
     oh-my-posh
     ncdu # disk usage tool
     ncftp
