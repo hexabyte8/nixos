@@ -247,6 +247,9 @@
     kitty
     wezterm
 
+    # Games
+    steam
+
   ];
   environment.variables = {
     JAKOS_NIXOS_VERSION = "0.0.5";
