@@ -177,10 +177,14 @@
     (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default)
     (inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.default)
 
-    # Utils
-    #browsr # file browser   # Fails python build 11/14/2025 
+    # Art
     aseprite
+
+    # Books
     foliate
+    epy
+
+    # Utils
     ctop # container top
     erdtree # great tree util run: erd
     frogmouth # cli markdown renderer A
