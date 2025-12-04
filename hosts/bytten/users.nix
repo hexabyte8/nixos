@@ -33,7 +33,7 @@ in
   }; 
   
   environment.shells = with pkgs; [ zsh ];
-  environment.systemPackages = with pkgs; [ lsd fzf ]; 
+  environment.systemPackages = with pkgs; [ lsd fzf git ]; 
     
   programs = {
     zsh = {
@@ -42,6 +42,9 @@ in
         theme = "agnoster";
         plugins = [ "git" ];
       };
+      # Enable zsh plugins via NixOS module options
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
     };
   };
 }
