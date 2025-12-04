@@ -125,7 +125,7 @@ in
 
   # networking
   networking = {
-    nameserver = [ "8.8.8.8" "1.1.1.1" ];
+    nameservers = [ "8.8.8.8" "1.1.1.1" ];
     networkmanager.enable = true;
     hostName = "${host}";
     timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
