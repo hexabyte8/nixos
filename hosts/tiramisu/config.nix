@@ -1,12 +1,11 @@
 # 💫 https://github.com/JaKooLit 💫 #
 # Main default config
 
-{
-  pkgs,
-  host,
-  username,
-  options,
-  ...
+{ pkgs
+, host
+, username
+, options
+, ...
 }:
 let
 
@@ -131,6 +130,7 @@ in
     hostName = "${host}";
     timeServers = options.networking.timeServers.default ++ [ "pool.ntp.org" ];
   };
+
 
   # Set your time zone.
   services.automatic-timezoned.enable = true; # based on IP location
@@ -265,6 +265,7 @@ in
   };
 
   services.pulseaudio.enable = false; # stable branch
+  services.tailscale.enable = true;
 
   # Bluetooth
   hardware = {
@@ -323,14 +324,6 @@ in
       dates = "weekly";
       options = "--delete-older-than 7d";
     };
-  };
-
-  # Virtualization / Containers
-  virtualisation.libvirtd.enable = false;
-  virtualisation.podman = {
-    enable = false;
-    dockerCompat = false;
-    defaultNetwork.settings.dns_enabled = false;
   };
 
   # OpenGL
