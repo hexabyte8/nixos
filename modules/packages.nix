@@ -179,6 +179,8 @@
 
     # Utils
     #browsr # file browser   # Fails python build 11/14/2025 
+    aseprite
+    foliate
     ctop # container top
     erdtree # great tree util run: erd
     frogmouth # cli markdown renderer A
