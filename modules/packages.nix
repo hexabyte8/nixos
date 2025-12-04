@@ -243,6 +243,7 @@
 
     # Internet
     vesktop
+    signal
 
     # Video
     vlc
