@@ -1,8 +1,7 @@
-{
-  pkgs,
-  inputs,
-  host,
-  ...
+{ pkgs
+, inputs
+, host
+, ...
 }:
 {
 
@@ -18,7 +17,7 @@
     };
     zsh.enable = true;
     firefox.enable = true;
-    waybar.enable = true;
+    waybar.enable = false; #started by Hyprland dotfiles. Enabling causes two waybars
     hyprlock.enable = true;
     dconf.enable = true;
     seahorse.enable = true;
@@ -47,33 +46,17 @@
 
   };
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.packageOverrides = pkgs: {
-        curseforge = pkgs.stdenv.mkDerivation {
-          name = "curseforge";
-          src = builtins.path { path = ../curseforge-latest-linux.deb; };
-          unpackPhase = ''
-            dpkg-deb -x $src .
-          '';
-          installPhase = ''
-            mkdir -p $out/bin
-            cp -r usr/* $out/
-            # Create a symlink for easier access
-            ln -s $out/share/curseforge/curseforge $out/bin/curseforge
-          '';
-          nativeBuildInputs = [ pkgs.dpkg ];
-        };
-    };
 
   environment.systemPackages = with pkgs; [
 
-    # Update flkake script
-    (pkgs.writeShellScriptBin "fupdate" ''
+    # Update flake script
+    (pkgs.writeShellScriptBin "update" ''
       cd ~/NixOS-Hyprland
       nh os switch -u -H ${host} .
     '')
 
-    # Rebuild flkake script
-    (pkgs.writeShellScriptBin "frebuild" ''
+    # Rebuild flake script
+    (pkgs.writeShellScriptBin "rebuild" ''
       cd ~/NixOS-Hyprland
       nh os switch -H ${host} .
     '')
@@ -84,23 +67,23 @@
     '')
 
     # Hyprland Stuff
-
     hypridle
     hyprpolkitagent
     pyprland
     #uwsm
     hyprlang
-    zip
     hyprshot
     hyprcursor
     mesa
     nwg-displays
     nwg-look
     waypaper
+    waybar
     hyprland-qt-support # for hyprland-qt-support
 
     #  Apps
     loupe
+    appimage-run
     bc
     brightnessctl
     (btop.override {
@@ -109,9 +92,9 @@
     })
     bottom
     baobab
-    bind
     btrfs-progs
     cmatrix
+    distrobox
     dua
     duf
     cava
@@ -150,6 +133,7 @@
     kdePackages.qtwayland
     kdePackages.qtstyleplugin-kvantum # kvantum
     lazydocker
+    lazygit
     libappindicator
     libnotify
     libsForQt5.qtstyleplugin-kvantum # kvantum
@@ -163,7 +147,6 @@
     #nvtopPackages.full
     pamixer
     pavucontrol
-    halloy
     playerctl
     #polkit
     # polkit_gnome
@@ -175,10 +158,9 @@
     rofi
     slurp
     swappy
+    serie #git cli tool 
     swaynotificationcenter
     swww
-    tree
-    obsidian
     unzip
     wallust
     wdisplays
@@ -191,41 +173,53 @@
     yazi
     yt-dlp
 
-    (inputs.quickshell.packages.${pkgs.system}.default)
-    (inputs.ags.packages.${pkgs.system}.default)
+    (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default)
+    (inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.default)
 
     # Utils
-    caligula # burn ISOs at cli FAST
-    atop
-    gdu
-    glances
-    gping
-    htop
-    hyfetch
-    ipfetch
+    #browsr # file browser   # Fails python build 11/14/2025 
+    ctop # container top
+    erdtree # great tree util run: erd
+    frogmouth # cli markdown renderer A
+    lstr # another tree util 
     lolcat
-    opencode
-    lsd
+    lsd # ls replacement util
+    macchina # fetch tool
+    mcat # show images in terminal 
+    mdcat # Markdown tool
+    parallel-disk-usage # fast disk space tool run: pdu
+    pik # Interactive process killer 
     oh-my-posh
-    pfetch
-    ncdu
+    ncdu # disk usage tool
     ncftp
+    netop # network mon tool run: sudo netop
     ripgrep
     socat
     starship
+    trippy # trace tool like mtr  run  sudo trip host/IP
     tldr
+    tuptime # better uptime tool
     ugrep
     unrar
     v4l-utils
-    scanmem
     obs-studio
     zoxide
 
     # Hardware related
+    atop # monitoring tool
+    bandwhich # network monitor run with sudo
+    caligula # burn ISOs at cli FAST
     cpufetch
     cpuid
     cpu-x
-    #gsmartcontrol
+    cyme #list USB devices - very handy
+    gdu # Dusk usage 
+    glances # system monitor tool
+    gping # Graphical ping tool
+    htop # system monitor tool
+    hyfetch
+    ipfetch
+    pfetch
     smartmontools
     light
     lm_sensors
@@ -235,9 +229,9 @@
     # Development related
     luarocks
     nh
-    ansible
-    terraform
 
+    # Internet
+    discord
 
     # Virtuaizaiton
     virt-viewer
@@ -245,12 +239,15 @@
 
     # Video
     vlc
-    vesktop
 
     # Terminals
     kitty
     wezterm
 
   ];
+  environment.variables = {
+    JAKOS_NIXOS_VERSION = "0.0.5";
+    JAKOS = "true";
+  };
 
 }
