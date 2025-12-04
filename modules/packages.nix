@@ -163,6 +163,7 @@
     swww
     unzip
     wallust
+    wavemon
     wdisplays
     wl-clipboard
     wlr-randr
@@ -204,7 +205,6 @@
     v4l-utils
     obs-studio
     zoxide
-    ytdlp
 
     # Hardware related
     atop # monitoring tool
@@ -235,10 +235,6 @@
 
     # Internet
     vesktop
-
-    # Virtuaizaiton
-    virt-viewer
-    libvirt
 
     # Video
     vlc
