@@ -204,6 +204,7 @@
     v4l-utils
     obs-studio
     zoxide
+    ytdlp
 
     # Hardware related
     atop # monitoring tool
@@ -229,9 +230,11 @@
     # Development related
     luarocks
     nh
+    terraform
+    ansible
 
     # Internet
-    discord
+    vesktop
 
     # Virtuaizaiton
     virt-viewer
