@@ -34,7 +34,6 @@
       enable = true;
       defaultEditor = false;
     };
-    steam.enable = true;
 
     thunar.enable = true;
     thunar.plugins = with pkgs.xfce; [
