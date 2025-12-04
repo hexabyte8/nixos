@@ -197,6 +197,7 @@
     ripgrep
     socat
     starship
+    tailscale
     trippy # trace tool like mtr  run  sudo trip host/IP
     tldr
     tuptime # better uptime tool
