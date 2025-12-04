@@ -1,5 +1,5 @@
 {
-  description = "KooL's NixOS-Hyprland";
+  description = "NixOS-Hyprland";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
