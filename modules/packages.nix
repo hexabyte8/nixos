@@ -243,7 +243,7 @@
 
     # Internet
     vesktop
-    signal
+    signal-desktop
 
     # Video
     vlc
