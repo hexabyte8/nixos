@@ -1,0 +1,39 @@
+./copy.sh: line 86: xdg-user-dirs-update: command not found
+[34m[INFO][m NixOS Distro Detected. Setting up proper env's and configs.
+[34m[INFO][m Bibata-Hyprcursor directory detected. Activating Hyprcursor....
+[33m[NOTE][m kb_layout [35mus[m configured in settings.
+[34m[INFO][m AGS detected - enabling in startup and refresh scripts
+[34m[INFO][m Quickshell detected - enabling in startup and refresh scripts
+[34m[INFO][m Added KeybindsLayoutInit.sh to user Startup_Apps overlay
+[32m[OK][m Default editor set to [35mnvim[m.
+[32m[OK][m You have chosen < 1440p resolution.
+[32m[OK][m 12H format set on waybar clocks succesfully.
+[33m[NOTE][m No changes made. Rainbow borders remain enabled.
+[32m[OK][m - Copy completed for [33mfastfetch[m
+[32m[OK][m - Copy completed for [33mkitty[m
+[32m[OK][m - Copy completed for [33mrofi[m
+[32m[OK][m - Copy completed for [33mswaync[m
+[32m[OK][m - Copy completed for [33mwaybar[m
+[32m[OK][m Some [35mwallpapers[m copied successfully!
+[32m[OK][m Wallpapers downloaded successfully.
+[32m[OK][m Wallpapers copied successfully.
+[[1m[34mI[39m[0m] [1m[35mimage[39m[0m: .wallpaper_current
+[[1m[34mI[39m[0m] [1m[35mimage parser[39m[0m: Using [94m[1mKmeans[0m[39m backend parser
+[[1m[34mI[39m[0m] [1m[35mthreshold[39m[0m: Using a threshold of 11 in between colors.
+[[1m[34mI[39m[0m] [1m[35mcolorspace[39m[0m: Using [32m[1mLabMixed[0m[39m colorspace variation
+[[1m[34mI[39m[0m] [1m[35mscheme palette[39m[0m: Using [94m[1mDark16[0m[39m palette
+▐⠂       ▌     0.000 s	Generating color scheme..▐⠈       ▌     0.080 s	Generating color scheme..▐ ⠂      ▌     0.161 s	Generating color scheme..▐ ⠠      ▌     0.241 s	Generating color scheme..▐  ⡀     ▌     0.321 s	Generating color scheme..▐  ⠠     ▌     0.401 s	Generating color scheme..▐   ⠂    ▌     0.481 s	Generating color scheme..[    🗸    ]     0.561 s	Generating color scheme..
+[[1m[34mI[39m[0m] Color scheme palette generated!
+[48;2;77;72;77m    [49m[48;2;37;21;38m    [49m[48;2;84;53;112m    [49m[48;2;84;53;113m    [49m[48;2;162;75;116m    [49m[48;2;162;75;116m    [49m[48;2;147;95;83m    [49m[48;2;217;183;175m    [49m
+[48;2;152;128;122m    [49m[48;2;50;28;50m    [49m[48;2;112;70;150m    [49m[48;2;112;70;150m    [49m[48;2;216;100;154m    [49m[48;2;216;100;154m    [49m[48;2;196;127;111m    [49m[48;2;217;183;175m    [49m
+
+[[1m[34mI[39m[0m] [1m[35mtemplates[39m[0m: Writing templates..
+  * Templated [1mrofi[0m to '[3m/home/hexabyte/.config/rofi/wallust/colors-rofi.rasi[0m'
+  * Templated [1mwaybar[0m to '[3m/home/hexabyte/.config/waybar/wallust/colors-waybar.css[0m'
+  * Templated [1mquickshell[0m to '[3m/home/hexabyte/.config/quickshell/qml_color.json[0m'
+  * Templated [1mcava[0m to '[3m/home/hexabyte/.config/cava/config[0m'
+  * Templated [1mhypr[0m to '[3m/home/hexabyte/.config/hypr/wallust/wallust-hyprland.conf[0m'
+  * Templated [1mkitty[0m to '[3m/home/hexabyte/.config/kitty/kitty-themes/01-Wallust.conf[0m'
+[[1m[34mI[39m[0m] [1m[35mcache[39m[0m: Saving scheme to cache.
+
+[5m[1m[38;2;217;183;175mE [39m[0m[0m[5m[1m[38;2;196;127;111mN [39m[0m[0m[5m[1m[38;2;216;100;154mJ [39m[0m[0m[5m[1m[38;2;216;100;154mO [39m[0m[0m[5m[1m[38;2;112;70;150mY [39m[0m[0m[9m  [0m[5m[1m[38;2;112;70;150mT [39m[0m[0m[5m[1m[38;2;50;28;50mH [39m[0m[0m[5m[1m[38;2;152;128;122mE [39m[0m[0m[9m  [0m[5m[1m[38;2;217;183;175mP [39m[0m[0m[5m[1m[38;2;147;95;83mA [39m[0m[0m[5m[1m[38;2;162;75;116mL [39m[0m[0m[5m[1m[38;2;162;75;116mE [39m[0m[0m[5m[1m[38;2;84;53;113mT [39m[0m[0m[5m[1m[38;2;84;53;112mT [39m[0m[0m[5m[1m[38;2;37;21;38mE [39m[0m[0m[5m[1m[38;2;234;210;205m! [39m[0m[0m
