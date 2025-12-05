@@ -46,13 +46,19 @@ let
     # Get the focused monitor name
     MONITOR=$(hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true) | .name')
     
-    if [ -z "$MONITOR" ]; then
+    if [ -z "$MONITOR" ] || [ "$MONITOR" = "null" ]; then
       echo "No focused monitor found"
+      notify-send "Display" "Error: No focused monitor found" -t 2000
       exit 1
     fi
     
     # Get current transform value (0 = normal, 2 = 180°)
     CURRENT_TRANSFORM=$(hyprctl monitors -j | ${pkgs.jq}/bin/jq -r ".[] | select(.name == \"$MONITOR\") | .transform")
+    
+    # Handle case where transform is null, empty, or not found
+    if [ -z "$CURRENT_TRANSFORM" ] || [ "$CURRENT_TRANSFORM" = "null" ]; then
+      CURRENT_TRANSFORM="0"
+    fi
     
     if [ "$CURRENT_TRANSFORM" = "2" ]; then
       # Currently rotated 180°, set back to normal
@@ -130,8 +136,8 @@ EOF
     if [ -f "$HYPR_CONF" ]; then
       # Remove old osk.conf reference if present (we're migrating to tablet.conf)
       if grep -q "source.*osk.conf" "$HYPR_CONF" 2>/dev/null; then
-        sed -i '/# On-Screen Keyboard configuration/d' "$HYPR_CONF"
-        sed -i '/source.*osk.conf/d' "$HYPR_CONF"
+        # Remove the source line for osk.conf (the critical migration step)
+        sed -i '/source.*osk\.conf/d' "$HYPR_CONF"
       fi
       
       if ! grep -q "source.*tablet.conf" "$HYPR_CONF" 2>/dev/null; then
