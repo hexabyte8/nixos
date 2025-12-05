@@ -22,8 +22,9 @@ let
     # If wvkbd is not running, start it
     
     if pgrep -x "wvkbd-mobintl" > /dev/null; then
-      # wvkbd is running, toggle visibility with signal 34 (SIGRTMIN)
-      kill -34 $(pgrep -x wvkbd-mobintl)
+      # wvkbd is running, toggle visibility with signal RTMIN (34)
+      # Using pkill for safer signal delivery to all matching processes
+      pkill -x wvkbd-mobintl --signal RTMIN
     else
       # wvkbd not running, start it (hidden initially with -H flag)
       wvkbd-mobintl -H &
@@ -57,17 +58,15 @@ lib.mkIf isTabletHost {
 #
 # wvkbd shrinks all windows in your workspace when visible
 
-# Start wvkbd-mobintl at login (starts visible, use -H for hidden)
+# Start wvkbd-mobintl at login (visible by default, shows on-screen keyboard)
+# The toggle-osk script or keybind can be used to hide/show it
 exec-once = wvkbd-mobintl
 
 # Toggle OSK with SUPER + K
 bind = SUPER, K, exec, toggle-osk
 
 # Hyprgrass plugin configuration for touch gestures
-# The hyprgrass plugin is installed via tiramisu packages
-# Uncomment the plugin line below after adding hyprgrass to your Hyprland plugins
-# plugin = /path/to/hyprgrass.so
-
+# The hyprgrass plugin is installed via tiramisu packages (hyprlandPlugins.hyprgrass)
 plugin {
   touch_gestures {
     # Sensitivity for touch gestures (1.0 = default)
@@ -76,9 +75,6 @@ plugin {
     # Swipe from bottom edge upward to toggle OSK
     # This mimics mobile OS behavior
     hyprgrass-bind = , edge:d:u, exec, toggle-osk
-    
-    # Alternative: Direct kill command (original method)
-    # hyprgrass-bind = , edge:d:u, exec, kill -34 $(pgrep -x wvkbd-mobintl)
     
     # Optional: Swipe from left edge for app launcher (wofi)
     # hyprgrass-bind = , edge:l:r, exec, pkill wofi || wofi --show drun
