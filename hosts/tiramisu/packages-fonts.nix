@@ -1,5 +1,5 @@
 # 💫 https://github.com/JaKooLit 💫 #
-# Packages for this host only
+# Packages for this host only (Framework 12 laptop with tablet mode)
 
 { pkgs, ... }:
 let
@@ -20,6 +20,9 @@ in
     (with pkgs; [
       # System Packages
       fastfetch
+
+      # Tablet mode / touch support for Framework 12
+      hyprlandPlugins.hyprgrass  # Touch gestures plugin for Hyprland (swipe to toggle OSK)
     ])
     ++ [
       python-packages
