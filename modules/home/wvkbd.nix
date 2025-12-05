@@ -1,9 +1,14 @@
-# On-Screen Keyboard (wvkbd) configuration for Framework 12 tablet mode
-# Uses wvkbd-mobintl with hyprgrass for swipe gestures
-# 
-# Toggle methods:
-#   1. Keybind: SUPER + K (toggle OSK)
+# Tablet mode configuration for Framework 12 (2-in-1 laptop)
+# Features:
+#   - On-Screen Keyboard (wvkbd) with touch gestures (hyprgrass)
+#   - Display rotation toggle for tablet mode
+#
+# Toggle methods for OSK:
+#   1. Keybind: SUPER + ` (backtick/grave key - toggle OSK)
 #   2. Swipe: From bottom edge upward (via hyprgrass plugin)
+#
+# Display rotation:
+#   1. Keybind: SUPER + F7 (toggle display rotation 180°)
 #
 # wvkbd uses SIGRTMIN (signal 34) to toggle visibility
 # Reference: https://github.com/jjsullivan5196/wvkbd
@@ -31,30 +36,69 @@ let
     fi
   '';
 
+  # Toggle display rotation script for 2-in-1 tablet mode
+  # Flips the primary display 180° (normal <-> inverted)
+  toggleRotateScript = pkgs.writeShellScriptBin "toggle-rotate" ''
+    #!/usr/bin/env bash
+    # Toggle display rotation between normal (0) and inverted (180°)
+    # Uses hyprctl to get current transform and toggle it
+    
+    # Get the focused monitor name
+    MONITOR=$(hyprctl monitors -j | ${pkgs.jq}/bin/jq -r '.[] | select(.focused == true) | .name')
+    
+    if [ -z "$MONITOR" ] || [ "$MONITOR" = "null" ]; then
+      echo "No focused monitor found"
+      notify-send "Display" "Error: No focused monitor found" -t 2000
+      exit 1
+    fi
+    
+    # Get current transform value (0 = normal, 2 = 180°)
+    CURRENT_TRANSFORM=$(hyprctl monitors -j | ${pkgs.jq}/bin/jq -r ".[] | select(.name == \"$MONITOR\") | .transform")
+    
+    # Handle case where transform is null, empty, or not found
+    if [ -z "$CURRENT_TRANSFORM" ] || [ "$CURRENT_TRANSFORM" = "null" ]; then
+      CURRENT_TRANSFORM="0"
+    fi
+    
+    if [ "$CURRENT_TRANSFORM" = "2" ]; then
+      # Currently rotated 180°, set back to normal
+      hyprctl keyword monitor "$MONITOR,preferred,auto,1,transform,0"
+      notify-send "Display" "Rotation: Normal" -t 2000
+    else
+      # Currently normal (or other), rotate 180°
+      hyprctl keyword monitor "$MONITOR,preferred,auto,1,transform,2"
+      notify-send "Display" "Rotation: Inverted (180°)" -t 2000
+    fi
+  '';
+
 in
 lib.mkIf isTabletHost {
-  # Add wvkbd and toggle script to user packages
+  # Add wvkbd, toggle scripts to user packages
   home.packages = with pkgs; [
-    wvkbd        # Virtual keyboard for Wayland (wvkbd-mobintl variant)
+    wvkbd           # Virtual keyboard for Wayland (wvkbd-mobintl variant)
     toggleOskScript
+    toggleRotateScript
   ];
 
-  # Seed Hyprland config snippets for OSK integration
+  # Seed Hyprland config snippets for tablet mode (OSK + display rotation)
   # These will be appended to the user's hyprland.conf via activation script
-  home.activation.seedOskConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+  home.activation.seedTabletConfig = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
     set -eu
     
-    # Create OSK config snippet for Hyprland
-    OSK_CONF="$HOME/.config/hypr/osk.conf"
+    # Create tablet mode config snippet for Hyprland
+    TABLET_CONF="$HOME/.config/hypr/tablet.conf"
     mkdir -p "$HOME/.config/hypr"
     
-    cat > "$OSK_CONF" << 'EOF'
-# On-Screen Keyboard (wvkbd) Configuration
-# Source this file in your hyprland.conf: source = ~/.config/hypr/osk.conf
+    cat > "$TABLET_CONF" << 'EOF'
+# Tablet Mode Configuration (Framework 12 2-in-1)
+# Source this file in your hyprland.conf: source = ~/.config/hypr/tablet.conf
 #
-# Toggle methods:
-#   - Keyboard: SUPER + K
+# On-Screen Keyboard (wvkbd):
+#   - Keyboard: SUPER + ` (backtick/grave key - toggle OSK)
 #   - Touch: Swipe from bottom edge upward (requires hyprgrass plugin)
+#
+# Display Rotation:
+#   - Keyboard: SUPER + F7 (toggle 180° rotation for tablet mode)
 #
 # wvkbd shrinks all windows in your workspace when visible
 
@@ -62,8 +106,11 @@ lib.mkIf isTabletHost {
 # The toggle-osk script or keybind can be used to hide/show it
 exec-once = wvkbd-mobintl
 
-# Toggle OSK with SUPER + K
-bind = SUPER, K, exec, toggle-osk
+# Toggle OSK with SUPER + ` (backtick/grave key)
+bind = SUPER, grave, exec, toggle-osk
+
+# Toggle display rotation with SUPER + F7 (for 2-in-1 tablet mode)
+bind = SUPER, F7, exec, toggle-rotate
 
 # Hyprgrass plugin configuration for touch gestures
 # The hyprgrass plugin is installed via tiramisu packages (hyprlandPlugins.hyprgrass)
@@ -82,16 +129,22 @@ plugin {
 }
 EOF
     
-    chmod 644 "$OSK_CONF"
+    chmod 644 "$TABLET_CONF"
     
-    # Check if osk.conf is already sourced in hyprland.conf
+    # Check if tablet.conf is already sourced in hyprland.conf
     HYPR_CONF="$HOME/.config/hypr/hyprland.conf"
     if [ -f "$HYPR_CONF" ]; then
-      if ! grep -q "source.*osk.conf" "$HYPR_CONF" 2>/dev/null; then
+      # Remove old osk.conf reference if present (we're migrating to tablet.conf)
+      if grep -q "source.*osk.conf" "$HYPR_CONF" 2>/dev/null; then
+        # Remove the source line for osk.conf (the critical migration step)
+        sed -i '/source.*osk\.conf/d' "$HYPR_CONF"
+      fi
+      
+      if ! grep -q "source.*tablet.conf" "$HYPR_CONF" 2>/dev/null; then
         # Add source line to end of hyprland.conf if not already present
         echo "" >> "$HYPR_CONF"
-        echo "# On-Screen Keyboard configuration" >> "$HYPR_CONF"
-        echo "source = ~/.config/hypr/osk.conf" >> "$HYPR_CONF"
+        echo "# Tablet mode configuration (OSK + display rotation)" >> "$HYPR_CONF"
+        echo "source = ~/.config/hypr/tablet.conf" >> "$HYPR_CONF"
       fi
     fi
   '';
