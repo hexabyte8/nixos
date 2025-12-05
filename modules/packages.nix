@@ -82,6 +82,7 @@
     hyprland-qt-support # for hyprland-qt-support
 
     #  Apps
+    hyprgrass
     loupe
     appimage-run
     bc
