@@ -177,15 +177,6 @@
     (inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default)
     (inputs.ags.packages.${pkgs.stdenv.hostPlatform.system}.default)
 
-    # Art
-    aseprite
-    krita
-    gimp
-
-    # Books
-    foliate
-    epy
-    calibre
 
     # Utils
     ctop # container top
@@ -254,6 +245,21 @@
     # Terminals
     kitty
     wezterm
+
+    # Art
+    aseprite
+    krita
+    gimp
+
+    # Books
+    foliate
+    epy
+    calibre
+
+    # CAD
+    openscad
+    freecad
+
 
 
   ];
