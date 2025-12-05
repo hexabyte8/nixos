@@ -185,6 +185,7 @@
     # Books
     foliate
     epy
+    calibre
 
     # Utils
     ctop # container top
