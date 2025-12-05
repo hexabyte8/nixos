@@ -179,6 +179,8 @@
 
     # Art
     aseprite
+    krita
+    gimp
 
     # Books
     foliate
