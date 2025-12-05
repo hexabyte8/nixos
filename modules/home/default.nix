@@ -15,7 +15,6 @@
     ./cli/tealdeer.nix
     ./yazi
     ./overview.nix
-    ./wvkbd.nix  # On-screen keyboard for tablet mode (tiramisu)
   ];
 
 }
