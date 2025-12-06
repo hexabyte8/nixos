@@ -182,7 +182,7 @@
     # Utils
     anki # flashcards program
     ctop # container top
-    dig
+    bind
     erdtree # great tree util run: erd
     frogmouth # cli markdown renderer A
     imhex # hex editing program
