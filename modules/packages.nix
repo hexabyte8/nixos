@@ -134,6 +134,7 @@
     kdePackages.qtstyleplugin-kvantum # kvantum
     lazydocker
     lazygit
+    libreoffice
     libappindicator
     libnotify
     libsForQt5.qtstyleplugin-kvantum # kvantum
@@ -179,9 +180,11 @@
 
 
     # Utils
+    anki # flashcards program
     ctop # container top
     erdtree # great tree util run: erd
     frogmouth # cli markdown renderer A
+    imhex # hex editing program
     lstr # another tree util 
     lolcat
     lsd # ls replacement util
@@ -206,6 +209,7 @@
     unrar
     v4l-utils
     obs-studio
+    yt-dlp
     zoxide
 
     # Hardware related
@@ -238,6 +242,7 @@
     # Internet
     vesktop
     signal-desktop
+    stirling-pdf
 
     # Video
     vlc
@@ -259,6 +264,10 @@
     # CAD
     openscad
     freecad
+
+    # Small Games
+    wesnoth
+    endless-sky
 
 
 
