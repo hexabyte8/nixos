@@ -211,6 +211,7 @@
     obs-studio
     yt-dlp
     zoxide
+    zmap
 
     # Hardware related
     atop # monitoring tool
